@@ -1,0 +1,21 @@
+// メンテナンスメニュー
+.wrapper{
+  padding: 25px 40px;
+
+  .menus{
+    margin-top: 25px;
+
+    & > * + * {
+      margin-top: 20px;
+
+      .menu-row {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        column-gap: 25px;
+      }
+    }
+  }
+}
+
+
