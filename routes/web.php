@@ -65,18 +65,20 @@ Route::post('/notice_edit', [NoticeController::class, 'index'])
 
 
 // 同意文言管理
+Route::get('/clause', [ClauseController::class, 'index']
+)->name('clause');
 
-//  Route::get('/clause', function () {
-//     return Inertia::render('Clause/Clause');
-// })->name('clause');
+// 同意 検索時の処理
+Route::post('/search', [ClauseController::class, 'search'])
+->name('search');
 
-Route::get('/clause', function () {
-    $clauses = Clause::all(); // または適切な方法でデータを取得
+// 同意 最新世代表示時の処理
+Route::post('/latest', [ClauseController::class, 'latest'])
+->name('latest');
 
-    return Inertia::render('Clause/Clause', [
-        'clauses' => $clauses,
-    ]);
-})->name('clause');
+// 同意 全世代表示時の処理
+Route::post('/all', [ClauseController::class, 'all'])
+->name('all');
 
 // 同意文言詳細
 Route::get('/clause_detail/{id}', function ($id) {
@@ -86,15 +88,6 @@ Route::get('/clause_detail/{id}', function ($id) {
         'clause' => $clause,
     ]);
 })->where('id', '[0-9]+')->name('clause_detail');
-
-// 同意文言詳細
-// Route::get(`/clause_detail?id=${id}`, function () {
-//     $clause = Clause::find("id"); // 遷移下から受け取ったIDを元に同意情報を取得 
-
-//     return Inertia::render('ClauseDetail/ClauseDetail', [
-//         'clause' => $clause,
-//     ]);
-// })->name('clause_detail');
 
 // 同意文言編集
 Route::get('/clause_edit/{id}', function ($id) {
@@ -106,12 +99,8 @@ Route::get('/clause_edit/{id}', function ($id) {
 })->where('id', '[0-9]+')->name('clause_edit');
 
 // 同意 更新時の処理
-Route::post('/clause_edit_2', [ClauseController::class, 'index'])
+Route::post('/clause_edit_2', [ClauseController::class, 'update'])
 ->name('clause_edit_2');
-
-// 同意 検索時の処理
-Route::post('/search', [ClauseController::class, 'search'])
-->name('search');
 
 
 // bk側の記載(うまくいかなかった方)
